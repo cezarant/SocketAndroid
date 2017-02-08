@@ -6,25 +6,21 @@ import java.io.IOException;
 /**
  * Created by cezar on 2/6/17.
  */
-public class SyncConnect implements IConnnectType
+public class BridgeConnectType implements IConnnectType
 {
     private TCPBridge _brigdeConn;
-    public SyncConnect(TCPBridge apckConn)
+    public BridgeConnectType(TCPBridge apckConn)
     {
         _brigdeConn = apckConn;
     }
     @Override
     public void onSendMensage(ITcpListener aTcp, String aMsg)
     {
-        withBridge(aTcp, _brigdeConn,aMsg);
-    }
-    private void withBridge(ITcpListener aTcp, TCPBridge _bridgeTCP, String aMsg)
-    {
         char[] vetAlgo = new char[NetParameters.sizeOfResponse];
         try {
-            _bridgeTCP.get_mBufferOut().println(aMsg);
-            _bridgeTCP.get_mBufferOut().flush();
-            _bridgeTCP.get_mBufferIn().read(vetAlgo);
+            _brigdeConn.get_mBufferOut().println(aMsg);
+            _brigdeConn.get_mBufferOut().flush();
+            _brigdeConn.get_mBufferIn().read(vetAlgo);
 
             onReceiveMensage(String.valueOf(vetAlgo),aTcp);
         } catch (IOException e){

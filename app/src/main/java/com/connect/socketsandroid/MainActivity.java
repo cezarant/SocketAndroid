@@ -12,7 +12,7 @@ import com.connect.socketsandroid.net.ConnectBridgeAsyncTask;
 import com.connect.socketsandroid.net.AsyncSendSocketTask;
 import com.connect.socketsandroid.net.NetParameters;
 import com.connect.socketsandroid.net.TCPBridge;
-import com.connect.socketsandroid.net.SyncConnect;
+import com.connect.socketsandroid.net.BridgeConnectType;
 
 import java.util.Random;
 
@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements ITcpListener
         if(!isBridgeConnected)
             initTimerToConnect();
         else
-            new AsyncSendSocketTask(this,new SyncConnect(principalBridge)).execute();
+            new AsyncSendSocketTask(this,new BridgeConnectType(principalBridge)).execute();
     }
     /**********************************************************************************************/
     /* Implementation of methods */
