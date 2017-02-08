@@ -16,13 +16,13 @@ public class BridgeConnectType implements IConnnectType
     @Override
     public void onSendMensage(ITcpListener aTcp, String aMsg)
     {
-        char[] vetAlgo = new char[NetParameters.sizeOfResponse];
+        char[] vet_Bytes = new char[NetParameters.sizeOfResponse];
         try {
             _brigdeConn.get_mBufferOut().println(aMsg);
             _brigdeConn.get_mBufferOut().flush();
-            _brigdeConn.get_mBufferIn().read(vetAlgo);
+            _brigdeConn.get_mBufferIn().read(vet_Bytes);
 
-            onReceiveMensage(String.valueOf(vetAlgo),aTcp);
+            onReceiveMensage(String.valueOf(vet_Bytes),aTcp);
         } catch (IOException e){
             aTcp.onExceptionOcorred(e.getMessage());
         } catch (NullPointerException e){
