@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SocketsAndroid</string>
+    <string name="txtEnviar">Connect</string>
+    <string name="explicacao">Clique in the button to connect</string>
+    <string name="clickToSend">Clique to send messages</string>
+    <string name="Send">Send</string>
+    <string name="tryToConnect">tryToConnect</string>
+    <string name="endOfTry">Bad bridge man!</string>
+    <string name="wait">Wait a moment...</string>
+</resources>
