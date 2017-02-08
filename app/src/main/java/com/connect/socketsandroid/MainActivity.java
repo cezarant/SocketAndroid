@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.connect.socketsandroid.interfaces.ITcpListener;
+import com.connect.socketsandroid.net.AssincronnousConnectType;
+import com.connect.socketsandroid.net.BridgeConnectType;
 import com.connect.socketsandroid.net.ConnectBridgeAsyncTask;
 import com.connect.socketsandroid.net.AsyncSendSocketTask;
 import com.connect.socketsandroid.net.NetParameters;
 import com.connect.socketsandroid.net.TCPBridge;
-import com.connect.socketsandroid.net.BridgeConnectType;
 
 import java.util.Random;
 
@@ -57,10 +58,22 @@ public class MainActivity extends Activity implements ITcpListener
     }
     public void sendSocket(View v)
     {
-        if(!isBridgeConnected)
+        if(!isBridgeConnected) {
             initTimerToConnect();
-        else
-            new AsyncSendSocketTask(this,new BridgeConnectType(principalBridge)).execute();
+        }else {
+            // Situação nº 1, explicada no post
+            // Utilizando ReadLine
+            // new AsyncSendSocketTask(this, new WithOutBridgeConnectType()).execute();
+            // -------------------------------------------------------------------------------------
+            // Situação nº 2, explicada no post
+            // Utilizando Sockets Assíncronos
+            // new AsyncSendSocketTask(this, new AssincronnousConnectType()).execute();
+            // -------------------------------------------------------------------------------------
+            // Situação correta
+            // Esta é a situação que me gerou melhores resultados. Um socket que fica
+            // conectado de forma constante e que recebe os dados em forma de bytes.
+            new AsyncSendSocketTask(this, new BridgeConnectType(principalBridge)).execute();
+        }
     }
     /**********************************************************************************************/
     /* Implementation of methods */
